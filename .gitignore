@@ -62,6 +62,12 @@ typings/
 # next.js build output
 .next
 
+# Output JavaScript Files
+dist
+
 # idea settings
 serverless-vpc-integration.iml
 .idea
+
+# Serverless directories
+.serverless
