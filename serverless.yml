@@ -1,0 +1,33 @@
+service: serverless-vpc-integration
+
+plugins:
+  - serverless-prune-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: ap-northeast-1
+  stage: ${env:DEPLOY_STAGE}
+  environment:
+    DEPLOY_STAGE: ${env:DEPLOY_STAGE}
+
+package:
+  exclude:
+    - .git/**
+    - .nyc_output/**
+    - coverage/**
+    - .idea/**
+    - src/**
+    - node_modules/.bin/**
+    - node_modules/.cache/**
+
+custom:
+  authorizer:
+    name: authorization
+    type: 'TOKEN'
+    identitySource: method.request.header.Authorization
+    resultTtlInSeconds: 0
+
+functions:
+  authorization:
+    handler: dist/app/function/auth.authorization
