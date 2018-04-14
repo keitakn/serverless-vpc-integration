@@ -8,7 +8,10 @@
     "lint:fix": "tslint --project tsconfig.json --config tslint.json --fix 'src/**/*.{ts,tsx}' 'test/**/*.{ts,tsx}'",
     "build": "tsc",
     "deploy:dev": "yarn run build && DEPLOY_STAGE=dev serverless deploy -v",
-    "remove:dev": "serverless remove --stage dev --region ap-northeast-1 -v"
+    "remove:dev": "serverless remove --stage dev --region ap-northeast-1 -v",
+    "server:start": "yarn run build && pm2 start dist/server/index.js --name serverless-vpc-integration",
+    "server:restart": "pm2 restart serverless-vpc-integration",
+    "server:stop": "pm2 stop serverless-vpc-integration"
   },
   "repository": {
     "type": "git",
